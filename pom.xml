@@ -69,10 +69,10 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>[3.10.0,)</version> <!-- Enforce Maven 3.10.0 or later -->
+                  <version>[3.8.7,)</version> <!-- Enforce Maven 3.8.7 or newer -->
                 </requireMavenVersion>
                 <requireJavaVersion>
-                  <version>[21,)</version> <!-- Enforce Java 21 or later -->
+                  <version>[21,)</version> <!-- Enforce Java 21 or newer -->
                 </requireJavaVersion>
               </rules>
             </configuration>
