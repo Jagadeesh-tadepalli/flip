@@ -1,84 +1,71 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"     
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>my-app</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>my-app</name>
-  <url>https://maven.apache.org</url>
+    <modelVersion>4.0.0</modelVersion>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>21</maven.compiler.release>
-  </properties>
+    <groupId>com.example</groupId>
+    <artifactId>netflix-webapp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.13.4</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>4.13.2</junit.version>
+        <servlet.version>4.0.1</servlet.version>
+        <jstl.version>1.2</jstl.version>
+    </properties>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.14.0</version>
-          <configuration>
-            <release>21</release>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+    <dependencies>
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
-    <plugins>
-      <plugin>
-        <!-- Build an executable JAR -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.2</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com.mycompany.app.App</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+        <!-- JSTL (correct version available on Maven Central) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.6.1</version>
-        <executions>
-          <execution>
-            <id>enforce-maven</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>[3.8.7,)</version> <!-- Enforce Maven 3.8.7 or newer -->
-                </requireMavenVersion>
-                <requireJavaVersion>
-                  <version>[21,)</version> <!-- Enforce Java 21 or newer -->
-                </requireJavaVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+        <!-- JUnit 4 for testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>netflix-webapp</finalName>
+        <plugins>
+            <!-- Compiler plugin to use Java 17 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <!-- WAR plugin -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
